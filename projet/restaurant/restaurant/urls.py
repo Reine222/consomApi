@@ -22,12 +22,23 @@ from django.conf.urls.static import static
 from graphene_django.views import GraphQLView
 from restaurant.schema import schema
 
+from rest_framework.routers import DefaultRouter
+from .apiviews import *
+
+
+router = DefaultRouter()
+router.register('categorie', CategorieViewSet)
+router.register('plat', PlatViewSet)
+router.register('testimony', TestimonyViewSet)
+
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('resto.urls')),
     path('graphql', GraphQLView.as_view(graphiql=True, schema=schema)),
 ]
 
+urlpatterns += router.urls
 
 # if settings.DEBUG :
 #     urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
