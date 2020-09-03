@@ -104,3 +104,27 @@ class Reservation(models.Model):
     def __str__(self):
         """Unicode representation of Reservation."""
         return self.user.username
+
+
+
+class Service(models.Model):
+    """Model definition for Service."""
+
+    # TODO: Define fields here
+    icon = models.CharField(max_length=250)
+    titre = models.CharField(max_length=250)
+    description = models.TextField()
+
+    date_add = models.DateTimeField(auto_now=False, auto_now_add=True)
+    date_upd = models.DateTimeField(auto_now=True, auto_now_add=False)
+    status = models.BooleanField(default=True)
+
+    class Meta:
+        """Meta definition for Service."""
+
+        verbose_name = 'Service'
+        verbose_name_plural = 'Services'
+
+    def __str__(self):
+        """Unicode representation of Service."""
+        return self.titre

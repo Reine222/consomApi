@@ -26,7 +26,7 @@ class CategorieAdmin(admin.ModelAdmin):
 
 @admin.register(models.Plat)
 class PlatAdmin(admin.ModelAdmin):
-    list_display = ('categorie', 'nom', 'description', 'prix', 'date_add', 'date_upd', 'status', 'image',)
+    list_display = ('categorie', 'nom', 'description', 'prix', 'date_add', 'date_upd', 'status', 'view_image',)
     list_filter = ('date_add', 'date_upd', 'status',)
     list_search = ('nom')
     ordering = ('nom',)
@@ -55,7 +55,7 @@ class PlatAdmin(admin.ModelAdmin):
 
 @admin.register(models.Testimony)
 class TestimonyAdmin(admin.ModelAdmin):
-    list_display = ('nom', 'profession', 'description', 'fb', 'tweet', 'instagram', 'date_add', 'date_upd', 'status', 'image')
+    list_display = ('nom', 'profession', 'description', 'fb', 'tweet', 'instagram', 'date_add', 'date_upd', 'status', 'view_image')
     list_filter = ('date_add', 'date_upd', 'status',)
     list_search = ('nom')
     ordering = ('nom',)
@@ -70,3 +70,29 @@ class TestimonyAdmin(admin.ModelAdmin):
         queryset.update(status = False)
         self.message_user(request, 'Desactiver une Testimony')
     desactive.short_description = 'desactive Testimony'
+
+    def view_image(self, obj):
+        return mark_safe('<img src = "{url}" width ="100px" height ="100px" />'.format(url = obj.image.url))
+
+    def detail_image(self, obj):
+        return mark_safe('<img src = "{url}" width ="100px" height ="100px" />'.format(url = obj.image.url))
+
+
+@admin.register(models.Service)
+class ServiceAdmin(admin.ModelAdmin):
+    list_display = ('titre', 'icon', 'description', 'date_add', 'date_upd', 'status',)
+    list_filter = ('date_add', 'date_upd', 'status',)
+    list_search = ('titre')
+    ordering = ('titre',)
+    list_per_page = 5
+    actions = ('active', 'desactive',)
+
+    def active(self, request, queryset):
+        queryset.update(status=True)
+        self.message_user(request, 'Activer une Service')
+    active.short_description = 'active Service'
+
+    def desactive(self, queryset, request):
+        queryset.update(status = False)
+        self.message_user(request, 'Desactiver une Service')
+    desactive.short_description = 'desactive Service'

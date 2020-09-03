@@ -179,18 +179,17 @@
                 </div> 
               </div> -->
 
-              <div v-for='item in resultats_plat_cat'  class="tab-pane fade" :id="'pills-breakfast'+ item.id" role="tabpanel" :aria-labelledby="'pills-breakfast-tab'+ item.id">
-                <div v-for='item2 in item.catPlat' class="d-block d-md-flex menu-food-item">
-                  <div class="text order-1 mb-3">
-                    <img :src="item2.image" alt="Image">
-                    <h3><a href="#">${item2.nom}</a></h3>
-                    <p>Spinach and artichokes in a creamy cheese dip with warm tortilla chips &amp; salsa.</p>
-                  </div>
-                  <div class="price order-2">
-                    <strong>$10.49</strong>
-                  </div>
-                </div> <!-- .menu-food-item -->
-              </div>
+            <div v-for='item in resultats_plat_cat'  class="tab-pane fade" :id="'pills-breakfast'+ item.id" role="tabpanel" :aria-labelledby="'pills-breakfast-tab'+ item.id">
+              <div v-for='item2 in item.catPlat' class="d-block d-md-flex menu-food-item">
+                <div class="text order-1 mb-3">
+                  <img :src="item2.image" alt="Image">
+                  <h3><a href="#">${item2.nom}</a></h3>
+                  <p>Spinach and artichokes in a creamy cheese dip with warm tortilla chips &amp; salsa.</p>
+                </div>
+                <div class="price order-2">
+                  <strong>$10.49</strong>
+                </div>
+              </div> <!-- .menu-food-item -->
             </div>
           </div>
           
@@ -216,7 +215,7 @@
 
 
 
-
+ <!-- ********************************************* SERVICES ****************************************************** -->
 
   <div class="section bg-white services-section" data-aos="fade-up">
     <div class="container">
@@ -226,84 +225,67 @@
           <p class="sub-heading mb-5">Free Website Template For Restaurants Made by Colorlib</p>
         </div>
       </div>
-      <div class="row">
-        <div class="col-m mb-5d-6 col-lg-4" data-aos="fade-up">
-          <div class="media feature-icon d-block text-center">
-            <div class="icon">
-              <span class="flaticon-soup"></span>
-            </div>
-            <div class="media-body">
-              <h3>Quality Cuisine</h3>
-              <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the
-                blind texts.</p>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-6 col-lg-4 mb-5" data-aos="fade-up" data-aos-delay="100">
-          <div class="media feature-icon d-block text-center">
-            <div class="icon">
-              <span class="flaticon-vegetables"></span>
-            </div>
-            <div class="media-body">
-              <h3>Fresh Food</h3>
-              <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the
-                blind texts.</p>
+      <div id="graph_service">
+        <div class="row">
+          
+          <div class="col-m mb-5d-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
+            <div class="media feature-icon d-block text-center">
+              <div class="icon">
+                <span class="flaticon-soup"></span>
+              </div>
+              <div class="media-body">
+                <h3>Quality Cuisine</h3>
+                <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the
+                  blind texts.</p>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="col-md-6 col-lg-4 mb-5" data-aos="fade-up" data-aos-delay="300">
-          <div class="media feature-icon d-block text-center">
-            <div class="icon">
-              <span class="flaticon-pancake"></span>
-            </div>
-            <div class="media-body">
-              <h3>Bread &amp; Pancake</h3>
-              <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the
-                blind texts.</p>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-6 col-lg-4 mb-5" data-aos="fade-up" data-aos-delay="500">
-          <div class="media feature-icon d-block text-center">
-            <div class="icon">
-              <span class="flaticon-tray"></span>
-            </div>
-            <div class="media-body">
-              <h3>Reserve Now</h3>
-              <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the
-                blind texts.</p>
+          <div class="col-m mb-5d-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
+            <div class="media feature-icon d-block text-center">
+              <div class="icon">
+                <span class="flaticon-soup"></span>
+              </div>
+              <div class="media-body">
+                <h3>Quality Cuisine</h3>
+                <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the
+                  blind texts.</p>
+              </div>
             </div>
           </div>
-        </div>
+          <div class="col-m mb-5d-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
+            <div class="media feature-icon d-block text-center">
+              <div class="icon">
+                <span class="flaticon-soup"></span>
+              </div>
+              <div class="media-body">
+                <h3>Quality Cuisine</h3>
+                <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the
+                  blind texts.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-m mb-5d-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
+            <div class="media feature-icon d-block text-center">
+              <div class="icon">
+                <span class="flaticon-soup"></span>
+              </div>
+              <div class="media-body">
+                <h3>Quality Cuisine</h3>
+                <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the
+                  blind texts.</p>
+              </div>
+            </div>
+          </div>
 
-        <div class="col-md-6 col-lg-4 mb-5" data-aos="fade-up" data-aos-delay="300">
-          <div class="media feature-icon d-block text-center">
-            <div class="icon">
-              <span class="flaticon-salad"></span>
-            </div>
-            <div class="media-body">
-              <h3>Fresh Vegies Salad</h3>
-              <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the
-                blind texts.</p>
-            </div>
-          </div>
         </div>
-        <div class="col-md-6 col-lg-4 mb-5" data-aos="fade-up" data-aos-delay="500">
-          <div class="media feature-icon d-block text-center">
-            <div class="icon">
-              <span class="flaticon-chicken"></span>
-            </div>
-            <div class="media-body">
-              <h3>Whole Chicken</h3>
-              <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the
-                blind texts.</p>
-            </div>
-          </div>
-        </div>
-
       </div>
     </div>
   </div> <!-- .section -->
+
+
+
+
+
 
   <div class="section bg-light" data-aos="fade-up" id="section-reservation">
     <div class="container">
@@ -547,6 +529,54 @@
   })
 </script>
 
+
+<script>
+  var ma_vue = new Vue({
+    el: '#graph_service',
+    data: { 
+      resultats_services: {},
+      base_url: window.location.protocol + "//" + window.location.host+ '/',
+    },
+    delimiters: ["${", "}"],
+    mounted () {
+      this.getservices()
+    },
+    methods: {
+      getservices: function () {
+        axios.defaults.xsrfCookieName = 'csrftoken'
+        axios.defaults.xsrfHeaderName = 'X-CSRFToken'
+        axios({
+          url : this.base_url + 'graphql',
+          methode : 'post',
+          data : {
+            query: `
+              query{
+                allServices{
+                  edges{
+                    node{
+                      id
+                      titre
+                      icon
+                      description
+                      status
+                    }
+                  }
+                }
+              }
+            `
+          }
+        }).then(response => {
+          resultats = response.data.data;  
+          console.log(resultats);
+          //this.resultats_services = resultats.allServices;
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+      },
+    }
+  })
+</script>
 {% endblock js %}
 
 

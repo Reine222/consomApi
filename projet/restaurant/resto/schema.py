@@ -53,6 +53,14 @@ class TestimonyNode(DjangoObjectType):
 
 
 
+class ServiceNode(DjangoObjectType):
+    class Meta:
+        model = Service
+        filter_fields = ['titre', 'icon', 'description', 'date_add', 'date_upd', 'status']
+        interfaces = (relay.Node, )
+
+
+
 class Query(graphene.ObjectType):
     categorie = relay.Node.Field(CategorieNode)
     all_categories = DjangoFilterConnectionField(CategorieNode)
@@ -62,3 +70,6 @@ class Query(graphene.ObjectType):
 
     testimony = relay.Node.Field(TestimonyNode)
     all_testimonys = DjangoFilterConnectionField(TestimonyNode)
+
+    service = relay.Node.Field(ServiceNode)
+    all_services = DjangoFilterConnectionField(ServiceNode)
