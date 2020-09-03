@@ -33,6 +33,7 @@ router.register('testimony', TestimonyViewSet)
 
 
 urlpatterns = [
+    path('grappelli/', include('grappelli.urls')), # grappelli URLS
     path('admin/', admin.site.urls),
     path('sk/', include('skeleton.urls')),
     path('', include('resto.urls')),
