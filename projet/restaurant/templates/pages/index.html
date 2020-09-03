@@ -531,11 +531,11 @@
 
 
 <script>
-  var ma_vue = new Vue({
+  var ma_vue2 = new Vue({
     el: '#graph_service',
     data: { 
       resultats_services: {},
-      base_url: window.location.protocol + "//" + window.location.host+ '/',
+      base_url: window.location.protocol + "//" + window.location.host + '/',
     },
     delimiters: ["${", "}"],
     mounted () {
@@ -546,7 +546,7 @@
         axios.defaults.xsrfCookieName = 'csrftoken'
         axios.defaults.xsrfHeaderName = 'X-CSRFToken'
         axios({
-          url : this.base_url + 'graphql',
+          url : 'http://127.0.0.1:8000/graphql',
           methode : 'post',
           data : {
             query: `
