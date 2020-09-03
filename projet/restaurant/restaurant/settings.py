@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'resto.apps.RestoConfig',
     'graphene_django',
     'rest_framework',
+    'skeleton',
 ]
 
 MIDDLEWARE = [

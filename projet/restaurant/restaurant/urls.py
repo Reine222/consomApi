@@ -34,6 +34,7 @@ router.register('testimony', TestimonyViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('sk/', include('skeleton.urls')),
     path('', include('resto.urls')),
     path('graphql', GraphQLView.as_view(graphiql=True, schema=schema)),
 ]
