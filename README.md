@@ -64,3 +64,8 @@
 
 # Le top 10 des erreurs des dev django
     https://www.toptal.com/django/django-top-10-mistakes
+
+# admin personnalisé
+    https://github.com/django-fluent/django-fluent-dashboard
+
+    https://django-baton.readthedocs.io/en/latest/configuration.html
