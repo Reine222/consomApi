@@ -24,6 +24,7 @@ from restaurant.schema import schema
 
 from rest_framework.routers import DefaultRouter
 from .apiviews import *
+from django.views.decorators.csrf import csrf_exempt
 
 
 router = DefaultRouter()
@@ -33,11 +34,9 @@ router.register('testimony', TestimonyViewSet)
 
 
 urlpatterns = [
-    url(r'^admintools/', include('admin_tools.urls')),
     path('admin/', admin.site.urls),
-    path('sk/', include('skeleton.urls')),
     path('', include('resto.urls')),
-    path('graphql', GraphQLView.as_view(graphiql=True, schema=schema)),
+    path('graphql', csrf_exempt(GraphQLView.as_view(graphiql=True, schema=schema))),
 ]
 
 urlpatterns += router.urls

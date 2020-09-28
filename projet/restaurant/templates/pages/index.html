@@ -228,10 +228,10 @@
       <div id="graph_service">
         <div class="row">
           
-          <div class="col-m mb-5d-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
+          <div v-for="serv in resultats.node" class="col-m mb-5d-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
             <div class="media feature-icon d-block text-center">
               <div class="icon">
-                <span class="flaticon-soup"></span>
+                <span class="${serv.icon}"></span>
               </div>
               <div class="media-body">
                 <h3>Quality Cuisine</h3>
@@ -240,42 +240,7 @@
               </div>
             </div>
           </div>
-          <div class="col-m mb-5d-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
-            <div class="media feature-icon d-block text-center">
-              <div class="icon">
-                <span class="flaticon-soup"></span>
-              </div>
-              <div class="media-body">
-                <h3>Quality Cuisine</h3>
-                <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the
-                  blind texts.</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-m mb-5d-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
-            <div class="media feature-icon d-block text-center">
-              <div class="icon">
-                <span class="flaticon-soup"></span>
-              </div>
-              <div class="media-body">
-                <h3>Quality Cuisine</h3>
-                <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the
-                  blind texts.</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-m mb-5d-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
-            <div class="media feature-icon d-block text-center">
-              <div class="icon">
-                <span class="flaticon-soup"></span>
-              </div>
-              <div class="media-body">
-                <h3>Quality Cuisine</h3>
-                <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the
-                  blind texts.</p>
-              </div>
-            </div>
-          </div>
+         
 
         </div>
       </div>
@@ -533,8 +498,8 @@
 <script>
   var ma_vue2 = new Vue({
     el: '#graph_service',
-    data: { 
-      resultats_services: {},
+    data: {
+      resultats :[],
       base_url: window.location.protocol + "//" + window.location.host + '/',
     },
     delimiters: ["${", "}"],
@@ -546,8 +511,8 @@
         axios.defaults.xsrfCookieName = 'csrftoken'
         axios.defaults.xsrfHeaderName = 'X-CSRFToken'
         axios({
-          url : 'http://127.0.0.1:8000/graphql',
-          methode : 'post',
+          url : this.base_url + 'graphql',
+          method : 'post',
           data : {
             query: `
               query{
@@ -566,9 +531,8 @@
             `
           }
         }).then(response => {
-          resultats = response.data.data;  
-          console.log(resultats);
-          //this.resultats_services = resultats.allServices;
+          resultats = response.data.data.allServices.edges;  
+          console.log(resultats); 
         })
         .catch((err) => {
           console.log(err)
