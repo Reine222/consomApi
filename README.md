@@ -1,5 +1,106 @@
 # consomApi
  consommation API
+ 
+ # consommation graphql et api rest
+ 
+  
+    ############## API REST ##############
+    <script>
+     var ma_vue = new Vue({
+       el: '#identifiant_id',
+       data: { 
+         resultats_chef: {'succes': false,'reponse':'' },
+         resultats_plat_cat: [],
+       },
+       delimiters: ["${", "}"],
+       mounted () {
+         this.getchef()
+         this.getplatcat()
+       },
+       methods: {
+         getchef: function () {
+           //axios.defaults.xsrfCookieName = 'csrftoken'
+           //axios.defaults.xsrfHeaderName = 'X-CSRFToken'
+           axios.get('http://127.0.0.1:8000/testimony/').then(response => {
+             console.log(response)
+             this.resultats_chef= response.data  
+           })
+           .catch((err) => {
+             console.log(err)
+             this.result['reponse'] = "Probleme de connexion , veuillez contactez l'administrateur"
+             this.result['succes'] = false
+           })
+         },
+
+         getplatcat: function () {
+           //axios.defaults.xsrfCookieName = 'csrftoken'
+           //axios.defaults.xsrfHeaderName = 'X-CSRFToken'
+           axios.get('http://127.0.0.1:8000/categorie/').then(response => {
+             console.log(response)
+             this.resultats_plat_cat= response.data  
+           })
+           .catch((err) => {
+             console.log(err)
+             this.result['reponse'] = "Probleme de connexion , veuillez contactez l'administrateur"
+             this.result['succes'] = false
+           })
+         }
+
+       }
+     })
+    </script>
+    
+    ############## GRAPHQL ##############
+
+    <script>
+      var ma_vue2 = new Vue({
+        el: '#graph_service',
+        data: { 
+          resultats_services: {},
+          base_url: window.location.protocol + "//" + window.location.host + '/',
+        },
+        delimiters: ["${", "}"],
+        mounted () {
+          this.getservices()
+        },
+        methods: {
+          getservices: function () {
+            axios.defaults.xsrfCookieName = 'csrftoken'
+            axios.defaults.xsrfHeaderName = 'X-CSRFToken'
+            axios({
+              url : 'http://127.0.0.1:8000/graphql',
+              methode : 'post',
+              data : {
+                query: `
+                  query{
+                    allServices{
+                      edges{
+                        node{
+                          id
+                          titre
+                          icon
+                          description
+                          status
+                        }
+                      }
+                    }
+                  }
+                `
+              }
+            }).then(response => {
+              resultats = response.data.data;  
+              console.log(resultats);
+              //this.resultats_services = resultats.allServices;
+            })
+            .catch((err) => {
+              console.log(err)
+            })
+          },
+        }
+      })
+    </script>
+ 
+ 
 # Django session
     https://www.geeksforgeeks.org/python-sessions-framework-using-django/?ref=rp
 
