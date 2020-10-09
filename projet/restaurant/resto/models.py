@@ -122,8 +122,8 @@ class Service(models.Model):
     class Meta:
         """Meta definition for Service."""
 
-        verbose_name = 'Service'
-        verbose_name_plural = 'Services'
+        verbose_name = 'Nos Services'
+        verbose_name_plural = 'Nos Services'
 
     def __str__(self):
         """Unicode representation of Service."""

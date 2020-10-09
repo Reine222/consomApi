@@ -73,3 +73,21 @@ class Query(graphene.ObjectType):
 
     service = relay.Node.Field(ServiceNode)
     all_services = DjangoFilterConnectionField(ServiceNode)
+
+    service = graphene.List(
+        ServiceNode,
+        first=graphene.Int(),
+        skip=graphene.Int(),    
+    )
+
+    def resolve_links(self, info, search=None, first=None, skip=None, **kwargs):
+        qs = Service.objects.all()
+
+        if skip:
+            qs = qs[skip:]
+
+        if first:
+            qs = qs[:first]
+
+        return qs
+

@@ -256,7 +256,7 @@
             <div class="media feature-icon d-block text-center">
               <div class="icon">
                 <span :class="serv.node.icon"></span>
-              </div>
+              </div> 
               <div class="media-body">
                 <h3>${serv.node.titre}</h3>
                 <p>${serv.node.description}</p>
@@ -493,11 +493,11 @@
         //axios.defaults.xsrfCookieName = 'csrftoken'
         //axios.defaults.xsrfHeaderName = 'X-CSRFToken'
         axios.get('http://127.0.0.1:8000/testimony/').then(response => {
-          console.log(response)
+          // console.log(response)
           this.resultats_chef= response.data  
         })
         .catch((err) => {
-          console.log(err)
+          // console.log(err)
           this.result['reponse'] = "Probleme de connexion , veuillez contactez l'administrateur"
           this.result['succes'] = false
         })
@@ -507,11 +507,11 @@
         //axios.defaults.xsrfCookieName = 'csrftoken'
         //axios.defaults.xsrfHeaderName = 'X-CSRFToken'
         axios.get('http://127.0.0.1:8000/categorie/').then(response => {
-          console.log(response)
+          // console.log(response)
           this.resultats_plat_cat= response.data  
         })
         .catch((err) => {
-          console.log(err)
+          // console.log(err)
           this.result['reponse'] = "Probleme de connexion , veuillez contactez l'administrateur"
           this.result['succes'] = false
         })
@@ -550,10 +550,10 @@
           }
         }).then(response => {
           this.resultatsmenu = response.data.data.allCategories.edges;  
-          console.log(this.resultatsmenu); 
+          // console.log(this.resultatsmenu); 
         })
         .catch((err) => {
-          console.log(err)
+          // console.log(err)
         })
       }
 
@@ -568,13 +568,74 @@
     data: {
       resultats :[],
       base_url: window.location.protocol + "//" + window.location.host + '/',
+      next: false,
+      is_start: false,
+      after: '',
     },
     delimiters: ["${", "}"],
     mounted () {
       this.getservices()
     },
+    created(){
+      window.addEventListener('scroll', (e)=>{
+          this.verif()
+      })
+    },
     methods: {
+      verif: function(e){
+        if (this.is_start){return}
+
+        var bod = document.querySelector("body")
+        if (window.scrollY >= parseInt((bod.clientHeight * 50) / 100)){
+          if (this.next){
+            this.get_next_services()
+          }
+            
+        }
+      },
       getservices: function () {
+        this.is_start = true
+        axios.defaults.xsrfCookieName = 'csrftoken'
+        axios.defaults.xsrfHeaderName = 'X-CSRFToken'
+        axios({
+          url : this.base_url + 'graphql',
+          method : 'post',
+          data : {
+            query: `
+            query{
+              allServices(first:3 status:true){
+                edges{
+                  node{
+                    id
+                    titre
+                    icon
+                    description
+                    status
+                  }
+                  cursor
+                }
+                pageInfo{
+                  endCursor
+                  hasNextPage
+                }
+              }
+            }
+            `
+          }
+        }).then(response => {
+          this.resultats = response.data.data.allServices.edges;  
+          this.next = response.data.data.allServices.pageInfo.hasNextPage;  
+          this.after = response.data.data.allServices.pageInfo.endCursor;  
+          this.is_start = false;  
+          console.log(response.data.data.allServices.edges); 
+        })
+        .catch((err) => {
+          // console.log(err)
+        })
+      },
+      
+      get_next_services: function () {
+        this.is_start = true
         axios.defaults.xsrfCookieName = 'csrftoken'
         axios.defaults.xsrfHeaderName = 'X-CSRFToken'
         axios({
@@ -583,7 +644,7 @@
           data : {
             query: `
               query{
-                allServices{
+                allServices(first:3 after:"` + this.after + `" status:true){
                   edges{
                     node{
                       id
@@ -592,17 +653,25 @@
                       description
                       status
                     }
+                    cursor
+                  }
+                  pageInfo{
+                    endCursor
+                    hasNextPage
                   }
                 }
               }
             `
           }
         }).then(response => {
-          this.resultats = response.data.data.allServices.edges;  
-          console.log(this.resultats); 
+          this.resultats = this.resultats.concat(response.data.data.allServices.edges);
+          this.next = response.data.data.allServices.pageInfo.hasNextPage;  
+          this.after = response.data.data.allServices.pageInfo.endCursor;  
+          this.is_start = false;  
+          console.log(response.data.data.allServices.edges); 
         })
         .catch((err) => {
-          console.log(err)
+          // console.log(err)
         })
       },
     }
