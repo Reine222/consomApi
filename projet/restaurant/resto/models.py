@@ -1,7 +1,11 @@
 from django.db import models
 from django.contrib.auth.models import User
+from parler.models import TranslatableModel, TranslatedFields
+
 
 # Create your models here.
+
+
 class Categorie(models.Model):
     """Model definition for Categorie."""
 
@@ -119,6 +123,7 @@ class Service(models.Model):
     date_upd = models.DateTimeField(auto_now=True, auto_now_add=False)
     status = models.BooleanField(default=True)
 
+
     class Meta:
         """Meta definition for Service."""
 
@@ -128,3 +133,15 @@ class Service(models.Model):
     def __str__(self):
         """Unicode representation of Service."""
         return self.titre
+
+
+# ##################################################################################################################################################################
+
+class Voir(TranslatableModel):
+    translations = TranslatedFields(
+        title = models.CharField(max_length=200)
+    )
+    status = models.BooleanField(default=True)
+
+    def __unicode__(self):
+        return self.title

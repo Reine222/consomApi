@@ -1,6 +1,9 @@
 from django.contrib import admin
 from . import models
 from django.utils.safestring import mark_safe
+from parler.forms import TranslatableModelForm, TranslatedField
+from parler.admin import TranslatableAdmin, TranslatableStackedInline, TranslatableTabularInline
+from django.contrib.admin.widgets import AdminTextInputWidget
 # Register your models here.
 
 @admin.register(models.Categorie)
@@ -78,6 +81,8 @@ class TestimonyAdmin(admin.ModelAdmin):
         return mark_safe('<img src = "{url}" width ="100px" height ="100px" />'.format(url = obj.image.url))
 
 
+
+
 @admin.register(models.Service)
 class ServiceAdmin(admin.ModelAdmin):
     list_display = ('titre', 'icon', 'description', 'date_add', 'date_upd', 'status',)
@@ -96,3 +101,28 @@ class ServiceAdmin(admin.ModelAdmin):
         queryset.update(status = False)
         self.message_user(request, 'Desactiver une Service')
     desactive.short_description = 'desactive Service'
+
+
+
+
+
+
+
+# class VoirAdminForm(TranslatableModelForm):
+#     title = TranslatedField(widget=AdminTextInputWidget)
+
+
+@admin.register(models.Voir)
+class VoirAdmin(TranslatableAdmin):
+
+    list_display = ('title', 'language_column',)
+    list_filter = ('status',)
+
+    fieldsets = (
+        ("titre", {
+            'fields': ('title',),
+        }),
+        ("filtre", {
+            'fields': ('status',),
+        })
+    )

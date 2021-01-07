@@ -1,10 +1,15 @@
 from django.shortcuts import render
+from .models import Voir
 
 # Create your views here.
 
 
 def home(request):
-    return render(request, 'pages/index.html')
+    translate =  Voir.objects.language('en').all()
+    data = {
+        'translate': translate,
+    }
+    return render(request, 'pages/index.html', data)
 
 
 
