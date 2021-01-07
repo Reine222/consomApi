@@ -4,8 +4,8 @@ from .models import Voir
 # Create your views here.
 
 
-def home(request):
-    translate =  Voir.objects.language('en').all()
+def home(request, lang):
+    translate =  Voir.objects.language(lang).all()
     data = {
         'translate': translate,
     }
